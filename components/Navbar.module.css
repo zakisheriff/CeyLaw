@@ -88,22 +88,27 @@
   }
 
   .navLinks {
-    display: none;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     top: 72px;
     left: 0;
-    width: 100%;
+    width: 100vw;
+    height: calc(100vh - 72px);
     background-color: var(--color-surface);
-    padding: 2rem;
-    box-shadow: var(--shadow-md);
-    border-bottom: 2px solid var(--color-primary);
-    gap: 1.5rem;
+    padding: 3rem 2rem;
+    gap: 2.5rem;
     align-items: flex-start;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.4s ease, visibility 0.4s;
+    z-index: 99;
   }
 
   .navLinks.mobileOpen {
-    display: flex;
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
   }
 
   .navLink {

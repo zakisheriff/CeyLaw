@@ -161,14 +161,21 @@
   border-top: 2px solid var(--color-primary);
 }
 
+.featureHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
 .featureIcon {
-  font-size: 3rem;
-  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
 }
 
 .featureCard h3 {
   font-size: 2.8rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   color: var(--color-primary);
 }
 

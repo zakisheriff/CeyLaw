@@ -4,8 +4,8 @@ import { Search, BookText, Bot, FileText } from "lucide-react";
 
 export default function Home() {
   const categories = [
-    "Criminal Law", "Civil Law", "Labour Law", "Land Law", 
-    "Family Law", "Commercial Law", "Consumer Law", "Constitutional Law", 
+    "Criminal Law", "Civil Law", "Labour Law", "Land Law",
+    "Family Law", "Commercial Law", "Consumer Law", "Constitutional Law",
     "Traffic / Road-related", "Procedure / Evidence"
   ];
 
@@ -15,16 +15,16 @@ export default function Home() {
       <section className={styles.heroSection}>
         <div className={`container ${styles.heroContainer}`}>
           <h1 className={styles.heroTitle}>
-            official sri lanka law database. <br/>ai explorer.
+            official sri lanka law database. <br />ai explorer.
           </h1>
           <p className={styles.heroSubtitle}>
             the complete sri lankan legislation. search, read, and understand our nation's laws.
           </p>
-          
+
           <div className={styles.searchBox}>
-            <input 
-              type="text" 
-              placeholder="Search by keyword, Act name, or topic..." 
+            <input
+              type="text"
+              placeholder="Search by keyword, Act name, or topic..."
               className={styles.searchInput}
             />
             <button className={styles.searchButton}>Search Laws</button>
@@ -99,10 +99,10 @@ export default function Home() {
               <div className={styles.mockAiMsg}>
                 <p>According to <strong>Section 366 of the Penal Code (1883)</strong>, whoever intending to take dishonestly any movable property out of the possession of any person without that person's consent, moves that property, is said to commit theft.</p>
                 <div className={styles.mockCitation}>
-                <div className={styles.mockCitationHeader}>
-                  <span className={styles.mockCitationIcon}><FileText size={16} /></span>
-                  Reference
-                </div>
+                  <div className={styles.mockCitationHeader}>
+                    <span className={styles.mockCitationIcon}><FileText size={16} /></span>
+                    Reference
+                  </div>
                   Penal Code, Section 366
                 </div>
               </div>
