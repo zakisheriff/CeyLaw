@@ -1,0 +1,78 @@
+.header {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.navContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: -0.5px;
+}
+
+.navLinks {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.navLink {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.navLink:hover {
+  color: var(--color-primary);
+}
+
+.navLink.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-secondary);
+}
+
+.authActions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.signInBtn {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.registerBtn {
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.registerBtn:hover {
+  background-color: var(--color-accent);
+  color: var(--color-surface);
+}
+
+@media (max-width: 768px) {
+  .navLinks {
+    display: none; /* Add mobile menu later */
+  }
+}

@@ -1,0 +1,327 @@
+.home {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hero Section */
+.heroSection {
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+  padding: 6rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroSection::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(31, 78, 121, 0.4) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.heroContainer {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  color: var(--color-surface);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  color: #A0ABC0;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+.searchBox {
+  display: flex;
+  max-width: 600px;
+  margin: 0 auto 3rem auto;
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--color-surface);
+}
+
+.searchInput {
+  flex: 1;
+  padding: 1.25rem 1.5rem;
+  font-size: 1.1rem;
+  border: none;
+  outline: none;
+  color: var(--color-text-primary);
+}
+
+.searchButton {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0 2rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.searchButton:hover {
+  background-color: #e5b92e;
+}
+
+.heroActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.primaryBtn {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  display: inline-block;
+  transition: background-color 0.2s ease;
+}
+
+.primaryBtn:hover {
+  background-color: #e5b92e;
+}
+
+.secondaryBtn {
+  background-color: transparent;
+  color: var(--color-surface);
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.secondaryBtn:hover {
+  background-color: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.5);
+}
+
+/* Sections Common */
+.sectionTitle {
+  font-size: 2.25rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.sectionHeader .sectionTitle {
+  margin-bottom: 0;
+}
+
+.viewAllLink {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.viewAllLink:hover {
+  color: var(--color-primary);
+}
+
+/* Features */
+.featuresSection {
+  padding: 5rem 0;
+  background-color: var(--color-surface);
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.featureCard {
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--color-background);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.featureIcon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.featureCard h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.featureCard p {
+  color: var(--color-text-secondary);
+}
+
+/* Categories */
+.categoriesSection {
+  padding: 5rem 0;
+  background-color: var(--color-background);
+}
+
+.categoriesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.categoryCard {
+  background-color: var(--color-surface);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.categoryCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-accent);
+}
+
+.categoryName {
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+/* AI Preview */
+.aiPreviewSection {
+  padding: 5rem 0;
+  background-color: var(--color-surface);
+}
+
+.aiPreviewContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.aiPreviewContent .sectionTitle {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.aiPreviewDesc {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 2rem;
+}
+
+.promptsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.promptItem {
+  background-color: var(--color-background);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  color: var(--color-primary);
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+}
+
+.aiPreviewMock {
+  position: relative;
+}
+
+.mockChat {
+  background-color: var(--color-background);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border);
+}
+
+.mockUserMsg {
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border-bottom-right-radius: 4px;
+  max-width: 80%;
+  margin-left: auto;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.mockAiMsg {
+  background-color: var(--color-surface);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--color-border);
+  max-width: 90%;
+  box-shadow: var(--shadow-sm);
+}
+
+.mockAiMsg p {
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.mockCitation {
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(201, 162, 39, 0.1);
+  color: #927518;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+  gap: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .aiPreviewContainer {
+    grid-template-columns: 1fr;
+  }
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+  .searchBox {
+    flex-direction: column;
+  }
+  .searchButton {
+    padding: 1rem 2rem;
+  }
+}
