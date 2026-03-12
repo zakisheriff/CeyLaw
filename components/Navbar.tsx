@@ -3,7 +3,6 @@
 import Link from "next/link";
 import styles from "./Navbar.module.css";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
 export default function Navbar() {
@@ -28,8 +27,14 @@ export default function Navbar() {
           {/* <span style={{fontSize: '0.6rem', marginLeft: '8px', verticalAlign: 'middle', backgroundColor: 'var(--color-primary)', color: 'white', padding: '2px 6px', borderRadius: '0px'}}>GOV</span> */}
         </Link>
         
-        <button className={styles.mobileMenuBtn} onClick={toggleMobileMenu} aria-label="Toggle menu">
-          {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        <button 
+          className={`${styles.mobileMenuBtn} ${isMobileMenuOpen ? styles.open : ""}`} 
+          onClick={toggleMobileMenu} 
+          aria-label="Toggle menu"
+        >
+          <span className={styles.hamburgerLine}></span>
+          <span className={styles.hamburgerLine}></span>
+          <span className={styles.hamburgerLine}></span>
         </button>
 
         <nav className={`${styles.navLinks} ${isMobileMenuOpen ? styles.mobileOpen : ""}`}>

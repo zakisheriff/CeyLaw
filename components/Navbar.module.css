@@ -74,10 +74,35 @@
 .mobileMenuBtn {
   display: none;
   background: transparent;
-  color: var(--color-primary);
   border: none;
-  padding: 0.5rem;
   cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  padding: 0;
+  z-index: 101; /* Ensure button stays on top of menu */
+}
+
+.hamburgerLine {
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: all 0.3s ease-in-out;
+  transform-origin: left center;
+}
+
+.mobileMenuBtn.open .hamburgerLine:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.mobileMenuBtn.open .hamburgerLine:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+
+.mobileMenuBtn.open .hamburgerLine:nth-child(3) {
+  transform: rotate(-45deg);
 }
 
 @media (max-width: 768px) {
@@ -90,18 +115,18 @@
   .navLinks {
     flex-direction: column;
     position: fixed;
-    top: 72px;
+    top: 0; /* Cover entire screen including header area */
     left: 0;
     width: 100vw;
-    height: calc(100vh - 72px);
+    height: 100vh;
     background-color: var(--color-surface);
-    padding: 3rem 2rem;
+    padding: 100px 2rem 3rem 2rem; /* Pad top to push below logo/button */
     gap: 2.5rem;
     align-items: flex-start;
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
-    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.4s ease, visibility 0.4s;
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.4s ease, visibility 0.5s;
     z-index: 99;
   }
 
@@ -112,7 +137,30 @@
   }
 
   .navLink {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-family: var(--font-heading);
+    letter-spacing: -0.05em;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+  }
+
+  /* Staggered entry animation when menu is open */
+  .navLinks.mobileOpen .navLink {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .navLinks.mobileOpen .navLink:nth-child(1) {
+    transition-delay: 0.3s;
+  }
+  
+  .navLinks.mobileOpen .navLink:nth-child(2) {
+    transition-delay: 0.4s;
+  }
+
+  .navLinks.mobileOpen .navLink:nth-child(3) {
+    transition-delay: 0.5s;
   }
 }
