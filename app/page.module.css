@@ -19,16 +19,16 @@
 }
 
 .heroTitle {
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(4rem, 10vw, 8rem);
   color: var(--color-surface);
   margin-bottom: 1.5rem;
   line-height: 0.85;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.06em;
   font-weight: 900;
 }
 
 .heroSubtitle {
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
   color: #cccccc;
   margin-bottom: 3rem;
   line-height: 1.2;
@@ -115,7 +115,7 @@
 
 /* Sections Common */
 .sectionTitle {
-  font-size: 2.25rem;
+  font-size: 3.5rem;
   margin-bottom: 3rem;
   text-align: center;
 }
@@ -167,7 +167,7 @@
 }
 
 .featureCard h3 {
-  font-size: 2.2rem;
+  font-size: 2.8rem;
   margin-bottom: 1rem;
   color: var(--color-primary);
 }
@@ -330,8 +330,17 @@
   }
   .searchBox {
     flex-direction: column;
+    align-items: stretch;
+    border-bottom: none;
+  }
+  .searchInput {
+    border-bottom: 2px solid var(--color-surface) !important;
+    margin-bottom: 1rem;
+    width: 100%;
   }
   .searchButton {
-    padding: 1rem 2rem;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
   }
 }

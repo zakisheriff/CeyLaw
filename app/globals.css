@@ -11,7 +11,7 @@
   --color-warning: #000000;
   --color-danger: #000000;
   
-  --font-heading: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-heading: 'Arial Black', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   --radius-sm: 0px;
@@ -60,7 +60,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
   line-height: 0.9;
   font-weight: 900;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.07em;
+  font-family: var(--font-heading);
 }
 
 a {
