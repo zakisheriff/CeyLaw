@@ -41,27 +41,38 @@
 .searchBox {
   display: flex;
   max-width: 800px;
-  margin: 0 auto 3rem auto;
+  margin: 0 auto 4rem auto;
+  border-bottom: 2px solid var(--color-surface);
+  align-items: center;
 }
 
 .searchInput {
   flex: 1;
-  border-right: none !important;
+  background-color: transparent !important;
+  color: var(--color-surface) !important;
+  border: none !important;
+  padding: 1rem 0;
+  font-size: 1.2rem;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
 }
 
 .searchButton {
-  background-color: var(--color-primary);
+  background-color: transparent;
   color: var(--color-surface);
   font-weight: 900;
-  font-size: 1.2rem;
-  padding: 0 3rem;
-  border: 4px solid var(--color-primary);
+  font-size: 1.3rem;
+  padding: 1rem 0 1rem 2rem;
+  border: none;
   cursor: pointer;
-  letter-spacing: -0.02em;
 }
 
 .searchButton:hover {
-  background-color: #222;
+  opacity: 0.6;
+  background-color: transparent;
   color: var(--color-surface);
 }
 
@@ -79,19 +90,17 @@
   font-size: 1.3rem;
   display: inline-block;
   text-decoration: none;
-  border: 4px solid var(--color-surface);
+  border: none;
 }
 
 .primaryBtn:hover {
-  background-color: transparent;
-  color: var(--color-surface);
-  opacity: 1;
+  opacity: 0.8;
 }
 
 .secondaryBtn {
   background-color: transparent;
   color: var(--color-surface);
-  border: 4px solid var(--color-surface);
+  border: 2px solid var(--color-surface);
   padding: 1.2rem 2.5rem;
   font-weight: 900;
   font-size: 1.2rem;
@@ -102,7 +111,6 @@
 .secondaryBtn:hover {
   background-color: var(--color-surface);
   color: var(--color-primary);
-  opacity: 1;
 }
 
 /* Sections Common */
@@ -145,27 +153,28 @@
 }
 
 .featureCard {
-  text-align: center;
-  padding: 3rem;
-  background-color: var(--color-surface);
+  text-align: left;
+  padding: 2rem 0;
+  background-color: transparent;
   color: var(--color-primary);
-  border: 4px solid var(--color-primary);
+  border: none;
+  border-top: 2px solid var(--color-primary);
 }
 
 .featureIcon {
   font-size: 3rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .featureCard h3 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin-bottom: 1rem;
   color: var(--color-primary);
 }
 
 .featureCard p {
   color: var(--color-primary);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 /* Categories */
@@ -183,22 +192,21 @@
 .categoryCard {
   background-color: var(--color-primary);
   color: var(--color-surface);
-  padding: 1.5rem;
-  border-radius: var(--radius-md);
-  border: 4px solid var(--color-primary);
-  text-align: center;
-  box-shadow: var(--shadow-sm);
+  padding: 2rem 1.5rem;
+  border-radius: 0;
+  border: none;
+  text-align: left;
   transition: all 0.2s ease;
 }
 
 .categoryCard:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--color-accent);
+  opacity: 0.9;
 }
 
 .categoryName {
-  font-weight: 500;
+  font-weight: 700;
+  font-size: 1.2rem;
   color: var(--color-surface);
 }
 

@@ -25,7 +25,7 @@
 }
 
 .logo:hover {
-  color: var(--color-secondary);
+  opacity: 0.6;
 }
 
 .description {
@@ -57,7 +57,7 @@
 }
 
 .linkGroup a:hover {
-  color: var(--color-secondary);
+  opacity: 0.6;
 }
 
 .bottomBar {
@@ -71,10 +71,9 @@
   font-size: 0.95rem;
   line-height: 1.4;
   margin-bottom: 1.5rem;
-  padding: 1rem;
-  background-color: var(--color-primary);
-  border-radius: var(--radius-md);
-  border: 2px solid var(--color-surface);
+  padding: 0;
+  background-color: transparent;
+  border: none;
 }
 
 .disclaimer strong {

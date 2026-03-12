@@ -15,10 +15,10 @@ export default function Home() {
       <section className={styles.heroSection}>
         <div className={`container ${styles.heroContainer}`}>
           <h1 className={styles.heroTitle}>
-            Official Sri Lanka <br/> Law Database & AI Explorer
+            official sri lanka law database. <br/>ai explorer.
           </h1>
           <p className={styles.heroSubtitle}>
-            The comprehensive A-Z public repository of all Sri Lankan legislation. Search, read, and understand our nation's laws instantly.
+            the complete sri lankan legislation. search, read, and understand our nation's laws.
           </p>
           
           <div className={styles.searchBox}>
@@ -40,22 +40,22 @@ export default function Home() {
       {/* Features Section */}
       <section className={styles.featuresSection}>
         <div className="container">
-          <h2 className={styles.sectionTitle}>How It Works</h2>
+          <h2 className={styles.sectionTitle}>how it works.</h2>
           <div className={styles.featuresGrid}>
             <div className={styles.featureCard}>
               <div className={styles.featureIcon}><Search size={32} /></div>
-              <h3>1. A-Z Library</h3>
-              <p>Explore every officially enacted Act, Ordinance, and Amendment in the complete structured public database.</p>
+              <h3>1. a-z library.</h3>
+              <p>explore every officially enacted act, ordinance, and amendment.</p>
             </div>
             <div className={styles.featureCard}>
               <div className={styles.featureIcon}><BookText size={32} /></div>
-              <h3>2. Read & Analyze</h3>
-              <p>Enjoy a clean, professional reading interface optimized for long-form legal documents.</p>
+              <h3>2. read and analyze.</h3>
+              <p>enjoy a clean, professional interface optimized for legal documents.</p>
             </div>
             <div className={styles.featureCard}>
               <div className={styles.featureIcon}><Bot size={32} /></div>
-              <h3>3. Ask the AI</h3>
-              <p>Get simple explanations with exact contextual citations to the relevant sections and Acts.</p>
+              <h3>3. ask the ai.</h3>
+              <p>get simple explanations with exact contextual citations to the acts.</p>
             </div>
           </div>
         </div>
