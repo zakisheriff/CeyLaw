@@ -301,7 +301,18 @@
   border-radius: var(--radius-md);
   font-size: 0.85rem;
   font-weight: 500;
-  gap: 0.5rem;
+  gap: 0.8rem;
+}
+
+.mockCitationHeader {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.mockCitationIcon {
+  display: inline-flex;
+  align-items: center;
 }
 
 @media (max-width: 900px) {
