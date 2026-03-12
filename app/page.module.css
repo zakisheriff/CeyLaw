@@ -5,10 +5,10 @@
 
 /* Hero Section */
 .heroSection {
-  background-color: var(--color-primary);
-  color: var(--color-surface);
+  background-color: var(--color-surface);
+  color: var(--color-primary);
   padding: 6rem 0 5rem 0;
-  text-align: center;
+  text-align: left;
   position: relative;
 }
 
@@ -20,7 +20,7 @@
 
 .heroTitle {
   font-size: clamp(4rem, 10vw, 8rem);
-  color: var(--color-surface);
+  color: var(--color-primary);
   margin-bottom: 1.5rem;
   line-height: 0.85;
   letter-spacing: -0.06em;
@@ -29,11 +29,11 @@
 
 .heroSubtitle {
   font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-  color: #cccccc;
+  color: var(--color-primary);
   margin-bottom: 3rem;
   line-height: 1.2;
   max-width: 800px;
-  margin-inline: auto;
+  margin-inline: 0;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -41,15 +41,15 @@
 .searchBox {
   display: flex;
   max-width: 800px;
-  margin: 0 auto 4rem auto;
-  border-bottom: 2px solid var(--color-surface);
+  margin: 0 0 4rem 0;
+  border-bottom: 2px solid var(--color-primary);
   align-items: center;
 }
 
 .searchInput {
   flex: 1;
   background-color: transparent !important;
-  color: var(--color-surface) !important;
+  color: var(--color-primary) !important;
   border: none !important;
   padding: 1rem 0;
   font-size: 1.2rem;
@@ -57,12 +57,12 @@
 }
 
 .searchInput::placeholder {
-  color: rgba(255, 255, 255, 0.5) !important;
+  color: rgba(0, 0, 0, 0.5) !important;
 }
 
 .searchButton {
   background-color: transparent;
-  color: var(--color-surface);
+  color: var(--color-primary);
   font-weight: 900;
   font-size: 1.3rem;
   padding: 1rem 0 1rem 2rem;
@@ -73,18 +73,18 @@
 .searchButton:hover {
   opacity: 0.6;
   background-color: transparent;
-  color: var(--color-surface);
+  color: var(--color-primary);
 }
 
 .heroActions {
   display: flex;
   gap: 1rem;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .primaryBtn {
-  background-color: var(--color-surface);
-  color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--color-surface);
   padding: 1.2rem 2.5rem;
   font-weight: 900;
   font-size: 1.3rem;
@@ -99,8 +99,8 @@
 
 .secondaryBtn {
   background-color: transparent;
-  color: var(--color-surface);
-  border: 2px solid var(--color-surface);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
   padding: 1.2rem 2.5rem;
   font-weight: 900;
   font-size: 1.2rem;
@@ -109,15 +109,15 @@
 }
 
 .secondaryBtn:hover {
-  background-color: var(--color-surface);
-  color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--color-surface);
 }
 
 /* Sections Common */
 .sectionTitle {
   font-size: 3.5rem;
   margin-bottom: 3rem;
-  text-align: center;
+  text-align: left;
 }
 
 .sectionHeader {
@@ -334,7 +334,7 @@
     border-bottom: none;
   }
   .searchInput {
-    border-bottom: 2px solid var(--color-surface) !important;
+    border-bottom: 2px solid var(--color-primary) !important;
     margin-bottom: 1rem;
     width: 100%;
   }
