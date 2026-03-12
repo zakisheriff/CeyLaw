@@ -29,9 +29,9 @@
 }
 
 .description {
-  color: #A0ABC0;
-  line-height: 1.6;
-  font-size: 0.95rem;
+  color: var(--color-surface);
+  line-height: 1.2;
+  font-size: 1.1rem;
 }
 
 .linksSection {
@@ -51,9 +51,9 @@
 
 .linkGroup a {
   display: block;
-  color: #A0ABC0;
+  color: var(--color-surface);
   margin-bottom: 1rem;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
 }
 
 .linkGroup a:hover {
@@ -61,20 +61,20 @@
 }
 
 .bottomBar {
-  background-color: #061223;
+  background-color: var(--color-primary);
   padding: 2rem 0;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid var(--color-primary);
 }
 
 .disclaimer {
-  color: #8C9BB3;
-  font-size: 0.85rem;
-  line-height: 1.6;
+  color: var(--color-surface);
+  font-size: 0.95rem;
+  line-height: 1.4;
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background-color: rgba(255,255,255,0.05);
+  background-color: var(--color-primary);
   border-radius: var(--radius-md);
-  border-left: 3px solid var(--color-secondary);
+  border: 2px solid var(--color-surface);
 }
 
 .disclaimer strong {
@@ -82,8 +82,8 @@
 }
 
 .copyright {
-  color: #6C7A92;
-  font-size: 0.85rem;
+  color: var(--color-surface);
+  font-size: 0.95rem;
   text-align: center;
 }
 
