@@ -17,8 +17,8 @@ export default function Navbar() {
     <header className={styles.header}>
       <div className={`container ${styles.navContainer}`}>
         <Link href="/" className={styles.logo}>
-          CeyLaw 
-          <span style={{fontSize: '0.6rem', marginLeft: '8px', verticalAlign: 'middle', backgroundColor: 'var(--color-primary)', color: 'white', padding: '2px 6px', borderRadius: '4px'}}>GOV</span>
+          ceylaw
+          <span style={{fontSize: '0.6rem', marginLeft: '8px', verticalAlign: 'middle', backgroundColor: 'var(--color-primary)', color: 'white', padding: '2px 6px', borderRadius: '0px'}}>GOV</span>
         </Link>
         
         <nav className={styles.navLinks}>
