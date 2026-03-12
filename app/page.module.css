@@ -7,110 +7,106 @@
 .heroSection {
   background-color: var(--color-surface);
   color: var(--color-primary);
-  padding: 6rem 0 5rem 0;
+  padding: 8rem 0;
   text-align: left;
   position: relative;
+  overflow: hidden;
+}
+
+.heroSection::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(201, 162, 39, 0.05) 0%, transparent 70%);
+  z-index: 0;
 }
 
 .heroContainer {
   position: relative;
   z-index: 1;
-  max-width: 800px;
 }
 
 .heroTitle {
-  font-size: clamp(4rem, 10vw, 8rem);
+  font-size: clamp(3rem, 6vw, 5rem);
   color: var(--color-primary);
-  margin-bottom: 1.5rem;
-  line-height: 0.85;
-  letter-spacing: -0.06em;
-  font-weight: 900;
+  margin-bottom: 2rem;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  max-width: 900px;
 }
 
 .heroSubtitle {
-  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-  color: var(--color-primary);
-  margin-bottom: 3rem;
-  line-height: 1.2;
-  max-width: 800px;
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  color: var(--color-text-secondary);
+  margin-bottom: 3.5rem;
+  line-height: 1.6;
+  max-width: 700px;
   margin-inline: 0;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 400;
 }
 
 .searchBox {
   display: flex;
-  max-width: 800px;
-  margin: 0 0 4rem 0;
-  border-bottom: 2px solid var(--color-primary);
+  max-width: 700px;
+  margin: 0 0 5rem 0;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 8px 8px 8px 24px;
   align-items: center;
+  box-shadow: var(--shadow-lg);
+  transition: border-color 0.2s;
+}
+
+.searchBox:focus-within {
+  border-color: var(--color-secondary);
 }
 
 .searchInput {
   flex: 1;
   background-color: transparent !important;
-  color: var(--color-primary) !important;
+  color: var(--color-text-primary) !important;
   border: none !important;
   padding: 1rem 0;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   outline: none;
 }
 
-.searchInput::placeholder {
-  color: rgba(0, 0, 0, 0.5) !important;
-}
-
 .searchButton {
-  background-color: transparent;
-  color: var(--color-primary);
-  font-weight: 900;
-  font-size: 1.3rem;
-  padding: 1rem 0 1rem 2rem;
-  border: none;
-  cursor: pointer;
-}
-
-.searchButton:hover {
-  opacity: 0.6;
-  background-color: transparent;
-  color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 12px 28px;
+  border-radius: var(--radius-lg);
 }
 
 .heroActions {
   display: flex;
-  gap: 1rem;
+  gap: 1.25rem;
   justify-content: flex-start;
 }
 
 .primaryBtn {
   background-color: var(--color-primary);
-  color: var(--color-surface);
-  padding: 1.2rem 2.5rem;
-  font-weight: 900;
-  font-size: 1.3rem;
-  display: inline-block;
-  text-decoration: none;
-  border: none;
-}
-
-.primaryBtn:hover {
-  opacity: 0.8;
+  color: #fff;
+  padding: 1rem 2.5rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
 }
 
 .secondaryBtn {
   background-color: transparent;
   color: var(--color-primary);
-  border: 2px solid var(--color-primary);
-  padding: 1.2rem 2.5rem;
-  font-weight: 900;
-  font-size: 1.2rem;
-  display: inline-block;
-  text-decoration: none;
-}
-
-.secondaryBtn:hover {
-  background-color: var(--color-primary);
-  color: var(--color-surface);
+  border: 1px solid var(--color-primary);
+  padding: 1rem 2.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 700;
 }
 
 /* Sections Common */
@@ -152,29 +148,34 @@
   gap: 2rem;
 }
 
+/* Hover transform removed per user request */
 .featureCard {
   text-align: left;
-  padding: 2rem 0;
-  background-color: transparent;
-  color: var(--color-primary);
-  border: none;
-  border-top: 2px solid var(--color-primary);
+  padding: 3rem 2rem;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .featureIcon {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: 2rem;
+  color: var(--color-secondary);
 }
 
 .featureCard h3 {
-  font-size: 2.8rem;
+  font-size: 1.75rem;
   margin-bottom: 1rem;
   color: var(--color-primary);
+  font-family: var(--font-heading);
 }
 
 .featureCard p {
-  color: var(--color-primary);
-  font-size: 1.2rem;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 /* Categories */
@@ -189,6 +190,7 @@
   gap: 1.5rem;
 }
 
+/* Hover effect simplified per user request */
 .categoryCard {
   background-color: var(--color-primary);
   color: var(--color-surface);
@@ -196,12 +198,6 @@
   border-radius: 0;
   border: none;
   text-align: left;
-  transition: all 0.2s ease;
-}
-
-.categoryCard:hover {
-  transform: translateY(-2px);
-  opacity: 0.9;
 }
 
 .categoryName {

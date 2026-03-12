@@ -1,19 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 import LawCard from "@/components/LawCard";
-import { mockLaws } from "@/lib/mockData";
 
 export default function LawsLibrary() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [liveLaws, setLiveLaws] = useState<any[]>([]);
+  const [totalChunks, setTotalChunks] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const categories = ["All", ...Array.from(new Set(mockLaws.map(law => law.category)))];
+  useEffect(() => {
+    async function fetchLaws() {
+      try {
+        const res = await fetch('/api/laws');
+        const data = await res.json();
+        if (data.laws) {
+          setLiveLaws(data.laws);
+          setTotalChunks(data.totalChunks);
+        }
+      } catch (err) {
+        console.error("Fetch error:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchLaws();
+  }, []);
 
-  const filteredLaws = mockLaws.filter(law => {
-    const matchesSearch = law.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          law.act_number.toLowerCase().includes(searchQuery.toLowerCase());
+  const categories = ["All", ...Array.from(new Set(liveLaws.map(law => law.category)))];
+
+  const filteredLaws = liveLaws.filter(law => {
+    const titleMatch = (law.title || "").toLowerCase().includes(searchQuery.toLowerCase());
+    const actMatch = (law.act_number || "").toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = titleMatch || actMatch;
     const matchesCategory = selectedCategory === "All" || law.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
@@ -22,19 +43,21 @@ export default function LawsLibrary() {
     <div className={styles.libraryPage}>
       <header className={styles.pageHeader}>
         <div className="container">
-          <h1 className={styles.pageTitle}>Laws Library</h1>
-          <p className={styles.pageSubtitle}>Browse, search, and read all acts and ordinances of Sri Lanka.</p>
+          <h1 className={styles.pageTitle}>laws library</h1>
+          <p className={styles.pageSubtitle}>
+            {totalChunks > 0 ? `browsing ${totalChunks} verified legal sections discovered in astra db.` : 'searching and indexing sri lankan acts in real-time...'}
+          </p>
         </div>
       </header>
 
       <div className={`container ${styles.libraryLayout}`}>
         <aside className={styles.sidebar}>
           <div className={styles.filterSection}>
-            <h3 className={styles.filterTitle}>Search</h3>
+            <h3 className={styles.filterTitle}>search</h3>
             <div className={styles.searchBox}>
               <input 
                 type="text" 
-                placeholder="Search an Act by name..." 
+                placeholder="search an act by name..." 
                 className={styles.searchInput}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -43,7 +66,7 @@ export default function LawsLibrary() {
           </div>
 
           <div className={styles.filterSection}>
-            <h3 className={styles.filterTitle}>Categories</h3>
+            <h3 className={styles.filterTitle}>categories</h3>
             <ul className={styles.categoryList}>
               {categories.map(cat => (
                 <li key={cat}>
@@ -61,34 +84,43 @@ export default function LawsLibrary() {
 
         <main className={styles.mainContent}>
           <div className={styles.resultsHeader}>
-            <p>Showing <strong>{filteredLaws.length}</strong> laws</p>
+            <p className={styles.countText}>
+              found <strong>{filteredLaws.length}</strong> unique acts 
+              {totalChunks > 0 && <span className={styles.chunkCount}> (across {totalChunks} sections)</span>}
+            </p>
             <div className={styles.sortBox}>
               <select className={styles.sortSelect} defaultValue="relevance">
-                <option value="relevance">Sort by Relevance</option>
-                <option value="newest">Newest First (Year)</option>
-                <option value="oldest">Oldest First (Year)</option>
-                <option value="az">A-Z</option>
+                <option value="relevance">sort by relevance</option>
+                <option value="newest">newest (year)</option>
+                <option value="oldest">oldest (year)</option>
+                <option value="az">a-z</option>
               </select>
             </div>
           </div>
 
-          <div className={styles.lawsGrid}>
-            {filteredLaws.map(law => (
-              <LawCard key={law.id} law={law} />
-            ))}
-            
-            {filteredLaws.length === 0 && (
-              <div className={styles.emptyState}>
-                <p>No laws found matching your search and category filters.</p>
-                <button 
-                  className={styles.clearFiltersBtn}
-                  onClick={() => { setSearchQuery(""); setSelectedCategory("All"); }}
-                >
-                  Clear Filters
-                </button>
-              </div>
-            )}
-          </div>
+          {isLoading ? (
+            <div className={styles.loadingContainer}>
+              <p>syncing with law database...</p>
+            </div>
+          ) : (
+            <div className={styles.lawsGrid}>
+              {filteredLaws.map(law => (
+                <LawCard key={law.id} law={law} />
+              ))}
+              
+              {filteredLaws.length === 0 && (
+                <div className={styles.emptyState}>
+                  <p>no laws found in the system yet.</p>
+                  <button 
+                    className={styles.clearFiltersBtn}
+                    onClick={() => { setSearchQuery(""); setSelectedCategory("All"); }}
+                  >
+                    clear filters
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </main>
       </div>
     </div>

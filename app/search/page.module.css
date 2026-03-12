@@ -34,7 +34,7 @@
 
 .searchBtn {
   background-color: var(--color-secondary);
-  color: var(--color-primary);
+  color: var(--color-surface);
   font-weight: 600;
   padding: 0 2rem;
   font-size: 1.05rem;
@@ -88,18 +88,14 @@
   text-align: left;
   padding: 0.75rem 1rem;
   border-radius: var(--radius-sm);
-  color: var(--color-text-primary);
+  color: var(--color-surface);
   font-size: 0.95rem;
   border: 1px solid transparent;
   transition: all 0.2s;
 }
 
-.tabBtn:hover {
-  background-color: var(--color-background);
-}
-
 .tabBtn.activeTab {
-  background-color: var(--color-primary);
+  background-color: var(--color-surface);
   border-color: var(--color-primary);
   color: var(--color-primary);
   font-weight: 600;
@@ -113,13 +109,13 @@
 }
 
 .aiPromoBlock h4 {
-  color: var(--color-primary);
+  color: var(--color-surface);
   margin-bottom: 0.5rem;
 }
 
 .aiPromoBlock p {
   font-size: 0.9rem;
-  color: var(--color-text-secondary);
+  color: var(--color-surface);
   margin-bottom: 1.5rem;
   line-height: 1.5;
 }

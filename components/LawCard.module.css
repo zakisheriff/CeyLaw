@@ -1,89 +1,97 @@
-.card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.2s ease;
-  box-shadow: var(--shadow-sm);
+.cardLink {
+  text-decoration: none !important;
+  color: inherit;
+  display: block;
 }
 
-.card:hover {
-  border-color: var(--color-accent);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+/* Hover effect removed per user request */
+/* Hover effect removed per user request */
+.card {
+  background-color: var(--color-primary);
+  border: 1px solid #ffffff;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
 }
 
 .cardHeader {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
 }
 
 .categoryBadge {
-  background-color: var(--color-primary);
-  color: var(--color-accent);
-  padding: 0.25rem 0.75rem;
-  border-radius: 2rem;
+  border: 1px solid var(--color-surface);
+  color: var(--color-surface) !important;
+  padding: 4px 12px;
   font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-weight: 900;
+  text-transform: lowercase;
 }
 
 .year {
-  color: var(--color-text-secondary);
-  font-size: 0.85rem;
-  font-weight: 500;
+  color: var(--color-surface) !important;
+  font-size: 1rem;
+  font-weight: 900;
 }
 
 .title {
-  font-size: 1.25rem;
-  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 4vw, 2rem);
   margin-bottom: 0.5rem;
-  line-height: 1.4;
+  line-height: 1.1;
+  color: var(--color-surface) !important;
+  font-weight: 900;
+  overflow-wrap: break-word;
 }
 
 .titleLink {
-  color: var(--color-primary);
+  color: var(--color-surface) !important;
+  text-decoration: underline;
 }
 
 .titleLink:hover {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
+  opacity: 0.7;
 }
 
 .actNumber {
-  color: var(--color-secondary);
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  color: var(--color-surface) !important;
+  font-size: 0.9rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
 }
 
 .description {
-  color: var(--color-text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.5;
+  color: var(--color-surface) !important;
+  font-size: 1.1rem;
+  line-height: 1.2;
   flex-grow: 1;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .cardFooter {
   border-top: 1px solid var(--color-border);
-  padding-top: 1rem;
+  padding-top: 1.25rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .readButton {
-  color: var(--color-accent);
-  font-weight: 600;
-  font-size: 0.95rem;
+  color: var(--color-surface) !important;
+  font-weight: 900;
+  text-decoration: underline;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: color 0.2s;
 }
 
 .readButton:hover {
-  color: var(--color-primary);
+  color: var(--color-secondary);
 }

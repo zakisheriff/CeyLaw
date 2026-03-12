@@ -3,19 +3,63 @@ import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import { mockLaws, mockSections } from "@/lib/mockData";
 import { Copy } from "lucide-react";
+import { collections } from "@/lib/astra";
 
 interface PageProps {
   params: { slug: string };
 }
 
-export default function LawReaderPage({ params }: PageProps) {
-  const law = mockLaws.find(l => l.slug === params.slug);
+export default async function LawReaderPage({ params }: PageProps) {
+  const { slug } = await params;
+  
+  // 1. Try to find in mock data first (for existing demos)
+  let law = mockLaws.find((l: any) => l.slug === slug);
+  let sections = mockSections.filter((s: any) => s.law_id === (law?.id || ""));
+
+  // 2. If not found in mock, check Astra DB
+  if (!law) {
+    try {
+      // For MVP we'll scan chunks to find matching normalized title.
+      // We scan up to 1000 chunks to ensure coverage for deep acts.
+      const cursor = collections.lawsVectors.find({}, {
+        limit: 1000,
+        projection: { act_title: 1, act_year: 1, section: 1, content: 1, category: 1 }
+      });
+      const chunks = await cursor.toArray();
+      
+      const matchingChunks = chunks.filter(c => 
+        c.act_title && c.act_title.toLowerCase().replace(/[^a-z0-9]+/g, '-') === slug
+      );
+
+      if (matchingChunks.length > 0) {
+        const first = matchingChunks[0];
+        law = {
+          id: first._id ? first._id.toString() : Math.random().toString(),
+          slug: slug,
+          title: first.act_title,
+          year: first.act_year || "n/a",
+          act_number: first.section ? `act section ${first.section}` : "act",
+          category: first.category || "general law",
+          description: "browsing live sections from astra db."
+        } as any;
+
+        // Group chunks as sections
+        sections = matchingChunks.map((c, idx) => ({
+          id: c._id ? c._id.toString() : `${idx}`,
+          law_id: law?.id || "",
+          section_number: c.section || `${idx + 1}`,
+          heading: c.act_title,
+          content: c.content
+        })) as any;
+      }
+    } catch (err) {
+      console.error("Astra Reader Error:", err);
+    }
+  }
   
   if (!law) {
     notFound();
   }
-
-  const sections = mockSections.filter(s => s.law_id === law.id);
 
   return (
     <div className={styles.readerPage}>

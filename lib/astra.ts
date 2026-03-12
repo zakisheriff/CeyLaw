@@ -21,8 +21,10 @@ export const db = client.db(ASTRA_DB_API_ENDPOINT);
 // 2. "laws" - Documents defining the Acts (e.g., {"title": "Penal Code", "year": 1883})
 // 3. "law_sections" - Documents containing the actual text and the $vector field for AI search.
 
+// 1. "laws_vectors" - The primary collection containing chunks and vector embeddings
 export const collections = {
+  lawsVectors: db.collection("laws_vectors"),
+  // Legacy placeholders below
   categories: db.collection("categories"),
   laws: db.collection("laws"),
-  lawSections: db.collection("law_sections"),
 };

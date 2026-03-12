@@ -10,7 +10,7 @@
   --color-success: #000000;
   --color-warning: #000000;
   --color-danger: #000000;
-  
+
   --font-heading: 'Arial Black', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
@@ -32,7 +32,8 @@
   letter-spacing: -0.04em;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -53,9 +54,15 @@ body {
   line-height: 1.1;
   -webkit-font-smoothing: antialiased;
   font-weight: 700;
+  overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--color-primary);
   margin-bottom: 1rem;
   line-height: 0.9;
@@ -89,7 +96,9 @@ button:hover {
   background-color: #333;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   border: 1px solid #000;
   background-color: #fff;
   color: #000;
@@ -110,15 +119,19 @@ input::placeholder {
 }
 
 /* Brutalist Component Overrides */
-[class*="card"], [class*="Card"] {
+[class*="card"],
+[class*="Card"] {
   background-color: #000;
   color: #fff;
 }
 
-[class*="card"] a, [class*="Card"] a {
+[class*="card"] a,
+[class*="Card"] a {
   color: #fff;
 }
 
-[class*="card"] h1, [class*="card"] h2, [class*="card"] h3 {
+[class*="card"] h1,
+[class*="card"] h2,
+[class*="card"] h3 {
   color: #fff;
 }

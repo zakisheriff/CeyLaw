@@ -1,4 +1,5 @@
-import { mockLaws, mockSections } from "@/lib/mockData";
+import { DataAPIClient } from "@datastax/astra-db-ts";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export type Citation = {
   act: string;
@@ -11,48 +12,58 @@ export type RetrievalResult = {
   citations: Citation[];
 };
 
-/**
- * Mocks a vector or full-text search retrieval against Astra DB.
- * In production, this would use DataAPI vector search capabilities.
- */
-export async function retrieveLegalContext(query: string, limit: number = 3, lawSlug?: string): Promise<RetrievalResult> {
-  const q = query.toLowerCase();
-  let relevantSections = mockSections.filter(sec => 
-    sec.heading.toLowerCase().includes(q) || 
-    sec.content.toLowerCase().includes(q)
-  );
+// Initialize Astra
+const astraClient = new DataAPIClient(process.env.ASTRA_DB_APPLICATION_TOKEN as string);
+const db = astraClient.db(process.env.ASTRA_DB_API_ENDPOINT as string, {
+  keyspace: process.env.ASTRA_DB_NAMESPACE || "default_keyspace"
+});
 
-  // If filtered by specific law context
-  if (lawSlug && lawSlug !== "all") {
-    const targetLaw = mockLaws.find(l => l.slug === lawSlug);
-    if (targetLaw) {
-      relevantSections = relevantSections.filter(sec => sec.law_id === targetLaw.id);
-    }
-  }
+// Initialize Gemini
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
 
-  // Take top N
-  const topSections = relevantSections.slice(0, limit);
+export async function retrieveLegalContext(query: string, limit: number = 5): Promise<RetrievalResult> {
+  try {
+    // 1. Generate Query Embedding
+    const model = genAI.getGenerativeModel({ model: "embedding-001" });
+    const result = await model.embedContent(query);
+    const embedding = result.embedding.values;
 
-  // Formatting context string for LLM
-  let contextText = "";
-  let citations: Citation[] = [];
+    // 2. Query Astra DB Vector Search
+    const collection = db.collection("laws_vectors");
+    const cursor = collection.find(
+      {},
+      {
+        sort: { $vector: embedding },
+        limit
+      }
+    );
+    
+    const documents = await cursor.toArray();
 
-  for (const ts of topSections) {
-    const law = mockLaws.find(l => l.id === ts.law_id);
-    if (law) {
-      contextText += `---\nAct: ${law.title} (${law.year})\nSection ${ts.section_number}: ${ts.heading}\nText:\n${ts.content}\n\n`;
+    // 3. Format result
+    let contextText = "";
+    let citations: Citation[] = [];
+
+    for (const doc of documents) {
+      contextText += `---\nAct: ${doc.act_title} (${doc.act_year})\nSection ${doc.section}:\n${doc.content}\n\n`;
       citations.push({
-        act: law.title,
-        section: `Section ${ts.section_number}`,
-        slug: law.slug
+        act: doc.act_title,
+        section: `Section ${doc.section}`,
+        slug: doc.act_title.toLowerCase().replace(/[^a-z0-9]+/g, '-')
       });
     }
-  }
 
-  return {
-    context: contextText || "No directly relevant sections found in the immediate retrieval set.",
-    citations
-  };
+    return {
+      context: contextText || "No directly relevant sections found in the current database.",
+      citations
+    };
+  } catch (error) {
+    console.error("Vector retrieval error:", error);
+    return {
+      context: "Error retrieving legal context.",
+      citations: []
+    };
+  }
 }
 
 /**

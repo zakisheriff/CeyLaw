@@ -83,20 +83,22 @@
 .promptsList button {
   width: 100%;
   text-align: left;
-  background-color: var(--color-background);
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
-  padding: 0.75rem 1rem;
+  padding: 1rem;
   border-radius: var(--radius-md);
   font-size: 0.9rem;
-  color: var(--color-text-secondary);
-  line-height: 1.4;
-  transition: all 0.2s;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
 }
 
 .promptsList button:hover {
-  background-color: var(--color-primary);
-  border-color: var(--color-accent);
+  background-color: var(--color-background);
+  border-color: var(--color-secondary);
   color: var(--color-primary);
+  transform: translateX(4px);
 }
 
 /* Chat Area */
@@ -182,19 +184,20 @@
 }
 
 .citationLink {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  padding: 0.4rem 0.75rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--color-accent);
+  background-color: rgba(201, 162, 39, 0.05);
+  border: 1px solid rgba(201, 162, 39, 0.2);
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-secondary);
   transition: all 0.2s;
 }
 
 .citationLink:hover {
-  background-color: var(--color-primary);
-  border-color: var(--color-accent);
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  border-color: var(--color-secondary);
 }
 
 /* Input Area */
@@ -268,12 +271,25 @@
   animation: pulse 1.4s infinite ease-in-out both;
 }
 
-.dotPulse:nth-child(1) { animation-delay: -0.32s; }
-.dotPulse:nth-child(2) { animation-delay: -0.16s; }
+.dotPulse:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.dotPulse:nth-child(2) {
+  animation-delay: -0.16s;
+}
 
 @keyframes pulse {
-  0%, 80%, 100% { transform: scale(0); }
-  40% { transform: scale(1); }
+
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+
+  40% {
+    transform: scale(1);
+  }
 }
 
 @media (max-width: 900px) {
@@ -281,11 +297,11 @@
     grid-template-columns: 1fr;
     height: auto;
   }
-  
+
   .sidebar {
     height: auto;
   }
-  
+
   .chatArea {
     height: 600px;
   }

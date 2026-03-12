@@ -8,26 +8,26 @@ interface LawCardProps {
 
 export default function LawCard({ law }: LawCardProps) {
   return (
-    <article className={styles.card}>
-      <div className={styles.cardHeader}>
-        <span className={styles.categoryBadge}>{law.category}</span>
-        <span className={styles.year}>{law.year}</span>
-      </div>
-      
-      <h3 className={styles.title}>
-        <Link href={`/laws/${law.slug}`} className={styles.titleLink}>
+    <Link href={`/laws/${law.slug}`} className={styles.cardLink}>
+      <article className={styles.card}>
+        <div className={styles.cardHeader}>
+          <span className={styles.categoryBadge}>{law.category}</span>
+          <span className={styles.year}>{law.year}</span>
+        </div>
+        
+        <h3 className={styles.title}>
           {law.title}
-        </Link>
-      </h3>
-      
-      <p className={styles.actNumber}>{law.act_number}</p>
-      <p className={styles.description}>{law.description}</p>
-      
-      <div className={styles.cardFooter}>
-        <Link href={`/laws/${law.slug}`} className={styles.readButton}>
-          Read Act &rarr;
-        </Link>
-      </div>
-    </article>
+        </h3>
+        
+        <p className={styles.actNumber}>{law.act_number}</p>
+        <p className={styles.description}>{law.description}</p>
+        
+        <div className={styles.cardFooter}>
+          <span className={styles.readButton}>
+            Read Act &rarr;
+          </span>
+        </div>
+      </article>
+    </Link>
   );
 }

@@ -4,71 +4,45 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: var(--shadow-sm);
 }
 
 .navContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  height: 80px;
 }
 
 .logo {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: var(--color-primary);
-  letter-spacing: -0.5px;
+  letter-spacing: -0.02em;
 }
 
 .navLinks {
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: center;
 }
 
 .navLink {
   color: var(--color-text-secondary);
-  font-weight: 500;
-  font-size: 0.95rem;
+  font-weight: 600;
+  font-size: 0.9rem;
   padding: 0.5rem 0;
   border-bottom: 2px solid transparent;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navLink:hover {
-  color: var(--color-primary);
+  color: var(--color-secondary);
 }
 
 .navLink.active {
   color: var(--color-primary);
   border-bottom-color: var(--color-secondary);
-}
-
-.authActions {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.signInBtn {
-  color: var(--color-primary);
-  font-weight: 500;
-}
-
-.registerBtn {
-  background-color: var(--color-primary);
-  color: var(--color-surface);
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-md);
-  font-weight: 500;
-  transition: background-color 0.2s ease;
-}
-
-.registerBtn:hover {
-  background-color: var(--color-accent);
-  color: var(--color-surface);
 }
 
 .mobileMenuBtn {
@@ -77,92 +51,55 @@
   border: none;
   cursor: pointer;
   flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 20px;
+  justify-content: center;
+  gap: 6px;
+  width: 32px;
+  height: 32px;
   padding: 0;
-  z-index: 101; /* Ensure button stays on top of menu */
+  z-index: 101;
 }
 
 .mobileMenuBtn:hover {
   background: transparent;
+  transform: none;
+  box-shadow: none;
 }
 
 .hamburgerLine {
   width: 100%;
   height: 2px;
   background-color: var(--color-primary);
-  transition: all 0.3s ease-in-out;
-  transform-origin: center; /* Changed from left center */
-}
-
-.mobileMenuBtn.open .hamburgerLine:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
-}
-
-.mobileMenuBtn.open .hamburgerLine:nth-child(2) {
-  opacity: 0;
-}
-
-.mobileMenuBtn.open .hamburgerLine:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
+  transition: all 0.3s ease;
 }
 
 @media (max-width: 768px) {
   .mobileMenuBtn {
     display: flex;
-    /* Removed align-items: center & justify-content: center which clustered the lines */
   }
 
   .navLinks {
     flex-direction: column;
     position: fixed;
-    top: 0; /* Cover entire screen including header area */
-    left: 0;
-    width: 100vw;
+    top: 0;
+    right: 0;
+    width: 300px;
     height: 100vh;
     background-color: var(--color-surface);
-    padding: 100px 2rem 3rem 2rem; /* Pad top to push below logo/button */
-    gap: 2.5rem;
+    padding: 100px 2rem;
+    gap: 2rem;
     align-items: flex-start;
-    transform: translateY(-100%);
-    opacity: 0;
-    visibility: hidden;
-    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.4s ease, visibility 0.5s;
+    transform: translateX(100%);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
     z-index: 99;
   }
 
   .navLinks.mobileOpen {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
+    transform: translateX(0);
   }
 
   .navLink {
-    font-size: 2.5rem;
-    font-weight: 900;
-    font-family: var(--font-heading);
-    letter-spacing: -0.05em;
-    transform: translateY(20px);
-    opacity: 0;
-    transition: transform 0.4s ease, opacity 0.4s ease;
-  }
-
-  /* Staggered entry animation when menu is open */
-  .navLinks.mobileOpen .navLink {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  .navLinks.mobileOpen .navLink:nth-child(1) {
-    transition-delay: 0.3s;
-  }
-  
-  .navLinks.mobileOpen .navLink:nth-child(2) {
-    transition-delay: 0.4s;
-  }
-
-  .navLinks.mobileOpen .navLink:nth-child(3) {
-    transition-delay: 0.5s;
+    font-size: 1.25rem;
+    width: 100%;
   }
 }

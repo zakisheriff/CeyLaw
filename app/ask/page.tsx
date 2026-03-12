@@ -35,7 +35,7 @@ function AskContext() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSend = (e?: React.FormEvent) => {
+  const handleSend = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (!input.trim()) return;
 
@@ -44,19 +44,34 @@ function AskContext() {
     setInput("");
     setIsLoading(true);
 
-    // Mock AI response delay
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMsg.content, lawSlug: selectedLaw })
+      });
+      
+      if (!res.ok) throw new Error("API failed");
+      
+      const data = await res.json();
+      
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
         role: "ai",
-        content: `This is a simulated AI response. Based on your query "${userMsg.content}", the relevant legal principles generally relate to the provisions found in the core statutes. Ensure you consult the exact sections for detailed reading.`,
-        citations: [
-          { act: "Penal Code", section: "Section 366", slug: "penal-code" }
-        ]
+        content: data.content,
+        citations: data.citations
       };
       setMessages(prev => [...prev, aiResponse]);
+    } catch (err) {
+      console.error(err);
+      setMessages(prev => [...prev, {
+        id: (Date.now() + 1).toString(),
+        role: "ai",
+        content: "Sorry, an error occurred while searching the legal database. Please try again."
+      }]);
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   const handlePromptClick = (promptText: string) => {
