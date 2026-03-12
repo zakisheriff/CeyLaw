@@ -84,6 +84,10 @@
   z-index: 101; /* Ensure button stays on top of menu */
 }
 
+.mobileMenuBtn:hover {
+  background: transparent;
+}
+
 .hamburgerLine {
   width: 100%;
   height: 2px;
