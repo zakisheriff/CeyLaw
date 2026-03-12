@@ -71,8 +71,43 @@
   color: var(--color-surface);
 }
 
+.mobileMenuBtn {
+  display: none;
+  background: transparent;
+  color: var(--color-primary);
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
+  .mobileMenuBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .navLinks {
-    display: none; /* Add mobile menu later */
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-surface);
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    border-bottom: 2px solid var(--color-primary);
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .navLinks.mobileOpen {
+    display: flex;
+  }
+
+  .navLink {
+    font-size: 1.5rem;
+    font-weight: 700;
   }
 }

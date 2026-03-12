@@ -3,9 +3,16 @@
 import Link from "next/link";
 import styles from "./Navbar.module.css";
 import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   const navLinks = [
     { href: "/search", label: "A-Z Search" },
@@ -18,15 +25,20 @@ export default function Navbar() {
       <div className={`container ${styles.navContainer}`}>
         <Link href="/" className={styles.logo}>
           ceylaw
-          <span style={{fontSize: '0.6rem', marginLeft: '8px', verticalAlign: 'middle', backgroundColor: 'var(--color-primary)', color: 'white', padding: '2px 6px', borderRadius: '0px'}}>GOV</span>
+          {/* <span style={{fontSize: '0.6rem', marginLeft: '8px', verticalAlign: 'middle', backgroundColor: 'var(--color-primary)', color: 'white', padding: '2px 6px', borderRadius: '0px'}}>GOV</span> */}
         </Link>
         
-        <nav className={styles.navLinks}>
+        <button className={styles.mobileMenuBtn} onClick={toggleMobileMenu} aria-label="Toggle menu">
+          {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+
+        <nav className={`${styles.navLinks} ${isMobileMenuOpen ? styles.mobileOpen : ""}`}>
           {navLinks.map((link) => (
             <Link 
               key={link.href} 
               href={link.href}
               className={`${styles.navLink} ${pathname === link.href ? styles.active : ""}`}
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               {link.label}
             </Link>
