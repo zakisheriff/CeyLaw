@@ -89,27 +89,25 @@
   height: 2px;
   background-color: var(--color-primary);
   transition: all 0.3s ease-in-out;
-  transform-origin: left center;
+  transform-origin: center; /* Changed from left center */
 }
 
 .mobileMenuBtn.open .hamburgerLine:nth-child(1) {
-  transform: rotate(45deg);
+  transform: translateY(9px) rotate(45deg);
 }
 
 .mobileMenuBtn.open .hamburgerLine:nth-child(2) {
   opacity: 0;
-  width: 0;
 }
 
 .mobileMenuBtn.open .hamburgerLine:nth-child(3) {
-  transform: rotate(-45deg);
+  transform: translateY(-9px) rotate(-45deg);
 }
 
 @media (max-width: 768px) {
   .mobileMenuBtn {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    /* Removed align-items: center & justify-content: center which clustered the lines */
   }
 
   .navLinks {
