@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import { mockLaws, mockSections } from "@/lib/mockData";
+import { Copy } from "lucide-react";
 
 interface PageProps {
   params: { slug: string };
@@ -64,7 +65,7 @@ export default function LawReaderPage({ params }: PageProps) {
                       <span className={styles.sectionNumber}>{sec.section_number}.</span> {sec.heading}
                     </h2>
                     <div className={styles.sectionActions}>
-                      <button className={styles.iconBtn} title="Copy Link">📋</button>
+                      <button className={styles.iconBtn} title="Copy Link"><Copy size={16} /></button>
                     </div>
                   </div>
                   <div className={styles.sectionContent}>

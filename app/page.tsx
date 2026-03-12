@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./page.module.css";
+import { Search, BookText, Bot, FileText } from "lucide-react";
 
 export default function Home() {
   const categories = [
@@ -42,17 +43,17 @@ export default function Home() {
           <h2 className={styles.sectionTitle}>How It Works</h2>
           <div className={styles.featuresGrid}>
             <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>🔍</div>
+              <div className={styles.featureIcon}><Search size={32} /></div>
               <h3>1. A-Z Library</h3>
               <p>Explore every officially enacted Act, Ordinance, and Amendment in the complete structured public database.</p>
             </div>
             <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>📖</div>
+              <div className={styles.featureIcon}><BookText size={32} /></div>
               <h3>2. Read & Analyze</h3>
               <p>Enjoy a clean, professional reading interface optimized for long-form legal documents.</p>
             </div>
             <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>🤖</div>
+              <div className={styles.featureIcon}><Bot size={32} /></div>
               <h3>3. Ask the AI</h3>
               <p>Get simple explanations with exact contextual citations to the relevant sections and Acts.</p>
             </div>
@@ -98,7 +99,10 @@ export default function Home() {
               <div className={styles.mockAiMsg}>
                 <p>According to <strong>Section 366 of the Penal Code (1883)</strong>, whoever intending to take dishonestly any movable property out of the possession of any person without that person's consent, moves that property, is said to commit theft.</p>
                 <div className={styles.mockCitation}>
-                  <span className={styles.mockCitationIcon}>📄</span>
+                <div className={styles.mockCitationHeader}>
+                  <span className={styles.mockCitationIcon}><FileText size={16} /></span>
+                  Reference
+                </div>
                   Penal Code, Section 366
                 </div>
               </div>

@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import styles from "./page.module.css";
 import { mockLaws } from "@/lib/mockData";
+import { FileText } from "lucide-react";
 
 type Message = {
   id: string;
@@ -119,7 +120,7 @@ function AskContext() {
                     <div className={styles.citationsQueue}>
                       {msg.citations.map((cite, i) => (
                         <Link key={i} href={`/laws/${cite.slug}#section-${cite.section}`} className={styles.citationLink}>
-                          📄 {cite.act}, {cite.section}
+                          <FileText size={12} className={styles.inlineIcon} /> {cite.act}, {cite.section}
                         </Link>
                       ))}
                     </div>

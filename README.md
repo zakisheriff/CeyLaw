@@ -19,8 +19,7 @@ A production-quality MVP web application for a **Sri Lankan Law Library & AI Leg
 ## Architecture
 
 - **Next.js 14+ (App Router)** for fast frontend delivery, static generation, API routes, and SEO optimization.
-- **TypeScript** natively integrated for safe, maintainable application scaling.
-- **Supabase**: Data models and components pre-structured for Postgres/Supabase deployment.
+- **DataStax Astra DB**: Massive free-tier DataAPI support pre-structured for NoSQL/Vector scaling.
 - **AI Abstraction**: `lib/ai/retrieval.ts` prepares standard pipelines for connecting the **Gemini 2.5 Flash** model with context-injected prompts (RAG configuration) for fast, cost-effective processing.
 
 ## Getting Started
@@ -51,11 +50,8 @@ A production-quality MVP web application for a **Sri Lankan Law Library & AI Leg
 │   └── globals.css      # Core CSS tokens and resets
 ├── components/          # Reusable shared components
 ├── lib/
-│   ├── ai/              # Retrieval helpers & prompt definitions
-│   ├── mockData.ts      # Seed legal definitions (mocked for MVP)
-│   └── supabase.ts      # Client configuration for Supabase
-├── supabase/
-│   └── schema.sql       # Database table defs for Postgres
+│   ├── astra.ts         # Client configuration for Astra DB
+│   └── mockData.ts      # Seed legal definitions (mocked for MVP)
 ├── public/              # Static assets
 └── .env.example         # Required env keys
 \`\`\`

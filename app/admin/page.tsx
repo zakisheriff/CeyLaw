@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
 import { mockLaws, Law } from "@/lib/mockData";
+import { Pencil, Trash2 } from "lucide-react";
 
 export default function AdminPage() {
   const [laws, setLaws] = useState<Law[]>(mockLaws);
@@ -67,8 +68,8 @@ export default function AdminPage() {
                     <td><span className={styles.badge}>{law.category}</span></td>
                     <td><span className={styles.statusLive}>Published</span></td>
                     <td className={styles.actionsCell}>
-                      <button className={styles.actionBtn} title="Edit">✎</button>
-                      <button className={styles.actionBtnDelete} title="Delete" onClick={() => handleDelete(law.id)}>🗑</button>
+                      <button className={styles.actionBtn} title="Edit"><Pencil size={16} /></button>
+                      <button className={styles.actionBtnDelete} title="Delete" onClick={() => handleDelete(law.id)}><Trash2 size={16} /></button>
                     </td>
                   </tr>
                 ))}

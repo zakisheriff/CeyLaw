@@ -12,8 +12,8 @@ export type RetrievalResult = {
 };
 
 /**
- * Mocks a vector or full-text search retrieval against the Supabase database.
- * In production, this would use pgvector or Supabase text search RPCs.
+ * Mocks a vector or full-text search retrieval against Astra DB.
+ * In production, this would use DataAPI vector search capabilities.
  */
 export async function retrieveLegalContext(query: string, limit: number = 3, lawSlug?: string): Promise<RetrievalResult> {
   const q = query.toLowerCase();
