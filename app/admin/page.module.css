@@ -16,7 +16,7 @@
 }
 
 .adminSubtitle {
-  color: #A0ABC0;
+  color: var(--color-primary);
   font-size: 1rem;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .adminNav button.activeNav {
-  background-color: rgba(31, 78, 121, 0.05);
+  background-color: var(--color-primary);
   color: var(--color-primary);
   border-left-color: var(--color-secondary);
   font-weight: 600;
@@ -162,8 +162,8 @@
 }
 
 .badge {
-  background-color: #f1f5f9;
-  color: #475569;
+  background-color: var(--color-primary);
+  color: var(--color-primary);
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius-sm);
   font-size: 0.75rem;
@@ -171,7 +171,7 @@
 }
 
 .statusLive {
-  background-color: rgba(15, 118, 110, 0.1);
+  background-color: var(--color-primary);
   color: var(--color-success);
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius-sm);
@@ -199,15 +199,15 @@
 }
 
 .actionBtn:hover {
-  background-color: rgba(31, 78, 121, 0.1);
+  background-color: var(--color-primary);
   color: var(--color-accent);
   border-color: var(--color-accent);
 }
 
 .actionBtnDelete:hover {
-  background-color: #fee2e2;
+  background-color: var(--color-primary);
   color: var(--color-danger);
-  border-color: #fca5a5;
+  border-color: var(--color-primary);
 }
 
 @media (max-width: 900px) {

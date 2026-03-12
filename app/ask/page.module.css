@@ -19,7 +19,7 @@
 }
 
 .pageSubtitle {
-  color: #A0ABC0;
+  color: var(--color-primary);
   font-size: 1rem;
 }
 
@@ -94,7 +94,7 @@
 }
 
 .promptsList button:hover {
-  background-color: #eef2f6;
+  background-color: var(--color-primary);
   border-color: var(--color-accent);
   color: var(--color-primary);
 }
@@ -165,7 +165,7 @@
 .citationsBlock {
   margin-top: 1.5rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(0,0,0,0.1);
+  border-top: 1px solid var(--color-primary);
 }
 
 .citationsTitle {
@@ -193,7 +193,7 @@
 }
 
 .citationLink:hover {
-  background-color: #eef2f6;
+  background-color: var(--color-primary);
   border-color: var(--color-accent);
 }
 
@@ -239,7 +239,7 @@
 }
 
 .sendBtn:hover:not(:disabled) {
-  background-color: #e5b92e;
+  background-color: var(--color-primary);
 }
 
 .sendBtn:disabled {

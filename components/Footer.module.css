@@ -45,7 +45,7 @@
   font-family: var(--font-body);
   font-size: 1rem;
   margin-bottom: 1.5rem;
-  text-transform: uppercase;
+  text-transform: lowercase;
   letter-spacing: 0.5px;
 }
 

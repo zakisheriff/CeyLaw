@@ -14,16 +14,16 @@ export default function Footer() {
         
         <div className={styles.linksSection}>
           <div className={styles.linkGroup}>
-            <h4>Platform</h4>
+            <h4>platform</h4>
             <Link href="/laws">A-Z Laws Library</Link>
             <Link href="/search">Advanced Search</Link>
             <Link href="/ask">Ask AI</Link>
           </div>
           <div className={styles.linkGroup}>
-            <h4>Legal</h4>
-            <Link href="/terms">Terms of Service</Link>
-            <Link href="/privacy">Privacy Policy</Link>
-            <Link href="/disclaimer">Disclaimer</Link>
+            <h4>legal</h4>
+            <Link href="/terms">terms of service</Link>
+            <Link href="/privacy">privacy policy</Link>
+            <Link href="/disclaimer">disclaimer</Link>
           </div>
         </div>
       </div>
@@ -31,10 +31,10 @@ export default function Footer() {
       <div className={styles.bottomBar}>
         <div className="container">
           <p className={styles.disclaimer}>
-            <strong>Disclaimer:</strong> CeyLaw provides legal information, legal text access, and AI-assisted research support for general informational purposes only. It does not constitute professional legal advice, legal representation, or a guaranteed legal opinion. Always verify the cited law and consult a qualified lawyer for case-specific advice.
+            <strong>disclaimer:</strong> ceylaw provides legal information, legal text access, and AI-assisted research support for general informational purposes only. It does not constitute professional legal advice, legal representation, or a guaranteed legal opinion. Always verify the cited law and consult a qualified lawyer for case-specific advice.
           </p>
           <p className={styles.copyright}>
-            &copy; {new Date().getFullYear()} CeyLaw. All rights reserved.
+            &copy; {new Date().getFullYear()} ceylaw. all rights reserved.
           </p>
         </div>
       </div>

@@ -44,7 +44,7 @@
 }
 
 .searchBtn:hover {
-  background-color: #e5b92e;
+  background-color: var(--color-primary);
 }
 
 .resultsLayout {
@@ -99,21 +99,21 @@
 }
 
 .tabBtn.activeTab {
-  background-color: rgba(31, 78, 121, 0.05);
-  border-color: rgba(31, 78, 121, 0.2);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
   color: var(--color-primary);
   font-weight: 600;
 }
 
 .aiPromoBlock {
-  background-color: rgba(201, 162, 39, 0.1);
-  border: 1px solid rgba(201, 162, 39, 0.3);
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-primary);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
 }
 
 .aiPromoBlock h4 {
-  color: #927518;
+  color: var(--color-primary);
   margin-bottom: 0.5rem;
 }
 
@@ -172,8 +172,8 @@
 }
 
 .resultTypeBadge {
-  background-color: #f1f5f9;
-  color: #475569;
+  background-color: var(--color-primary);
+  color: var(--color-primary);
   padding: 0.25rem 0.75rem;
   border-radius: 2rem;
   font-size: 0.75rem;
@@ -190,17 +190,17 @@
 }
 
 .high {
-  background-color: rgba(15, 118, 110, 0.1);
+  background-color: var(--color-primary);
   color: var(--color-success);
 }
 
 .medium {
-  background-color: rgba(201, 162, 39, 0.1);
-  color: #927518;
+  background-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .low {
-  background-color: rgba(75, 85, 99, 0.1);
+  background-color: var(--color-primary);
   color: var(--color-text-secondary);
 }
 
@@ -234,7 +234,7 @@
   color: var(--color-text-primary);
   line-height: 1.6;
   font-size: 0.95rem;
-  background-color: #f8fafc;
+  background-color: var(--color-primary);
   padding: 1rem;
   border-radius: var(--radius-md);
   border-left: 3px solid var(--color-border);
