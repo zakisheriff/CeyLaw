@@ -24,7 +24,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
 export async function retrieveLegalContext(query: string, limit: number = 5): Promise<RetrievalResult> {
   try {
     // 1. Generate Query Embedding
-    const model = genAI.getGenerativeModel({ model: "embedding-001" });
+    const model = genAI.getGenerativeModel({ model: "gemini-embedding-2-preview" });
     const result = await model.embedContent(query);
     const embedding = result.embedding.values;
 
@@ -77,6 +77,9 @@ You MUST follow these rules:
 2. If the answer is not in the context, clearly state that you do not have enough specific legal text to answer.
 3. Keep your explanation simple, clear, and easy to understand for a layperson.
 4. Always cite exactly the Act and Section number referenced in the context.
+5. DO NOT use emojis. Ever.
+6. Use **double asterisks** for bolding key terms, section numbers, and act names.
+7. Use clear paragraph breaks (empty lines) between sections of your response.
 
 --- CONTEXT EXCERPTS ---
 ${retrievedContext}

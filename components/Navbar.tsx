@@ -3,17 +3,42 @@
 import Link from "next/link";
 import styles from "./Navbar.module.css";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        // Also check if the click was on the hamburger button itself
+        // to avoid double-toggling if the button has its own click handler
+        const button = document.querySelector(`.${styles.mobileMenuBtn}`);
+        if (button && !button.contains(event.target as Node)) {
+          setIsMobileMenuOpen(false);
+        }
+      }
+    }
+
+    if (isMobileMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMobileMenuOpen]);
+
   const navLinks = [
+    { href: "/", label: "Home" },
     { href: "/search", label: "A-Z Search" },
     { href: "/laws", label: "Laws Library" },
     { href: "/ask", label: "Ask AI Assistant" }
@@ -37,7 +62,10 @@ export default function Navbar() {
           <span className={styles.hamburgerLine}></span>
         </button>
 
-        <nav className={`${styles.navLinks} ${isMobileMenuOpen ? styles.mobileOpen : ""}`}>
+        <nav 
+          ref={menuRef}
+          className={`${styles.navLinks} ${isMobileMenuOpen ? styles.mobileOpen : ""}`}
+        >
           {navLinks.map((link) => (
             <Link 
               key={link.href} 

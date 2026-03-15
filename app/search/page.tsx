@@ -23,7 +23,15 @@ function SearchContent() {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
 
-  const performSearch = (searchQuery: string) => {
+  // Auto-search for "constitution" if query is empty to avoid blank page
+  useEffect(() => {
+    if (!initialQuery) {
+      performSearch("Constitution");
+      setQuery("Constitution");
+    }
+  }, [initialQuery]);
+
+  const performSearch = async (searchQuery: string) => {
     if (!searchQuery.trim()) {
       setResults([]);
       return;
@@ -31,42 +39,21 @@ function SearchContent() {
     
     setIsSearching(true);
     
-    // Simulate API delay
-    setTimeout(() => {
-      const q = searchQuery.toLowerCase();
-      const newResults: SearchResult[] = [];
-
-      // Search Laws
-      mockLaws.forEach(law => {
-        if (law.title.toLowerCase().includes(q) || law.act_number.toLowerCase().includes(q)) {
-          newResults.push({
-            type: "law",
-            law,
-            excerpt: law.description,
-            relevance: "High"
-          });
-        }
-      });
-
-      // Search Sections
-      mockSections.forEach(sec => {
-        if (sec.heading.toLowerCase().includes(q) || sec.content.toLowerCase().includes(q)) {
-          const law = mockLaws.find(l => l.id === sec.law_id);
-          if (law) {
-            newResults.push({
-              type: "section",
-              law,
-              section: sec,
-              excerpt: sec.content,
-              relevance: sec.heading.toLowerCase().includes(q) ? "High" : "Medium"
-            });
-          }
-        }
-      });
-
-      setResults(newResults);
+    try {
+      const res = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`);
+      const data = await res.json();
+      
+      if (data.results) {
+        setResults(data.results);
+      } else {
+        setResults([]);
+      }
+    } catch (err) {
+      console.error("Search error:", err);
+      setResults([]);
+    } finally {
       setIsSearching(false);
-    }, 500);
+    }
   };
 
   useEffect(() => {

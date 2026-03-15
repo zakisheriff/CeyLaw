@@ -1,6 +1,6 @@
 .readerPage {
   background-color: var(--color-background);
-  min-height: 100vh;
+  min-height: auto;
 }
 
 .readerHeader {
@@ -63,9 +63,30 @@
   align-items: start;
 }
 
+@media (max-width: 1200px) {
+  .readerLayout {
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .readerLayout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem 1rem;
+  }
+}
+
 .stickyPanel {
   position: sticky;
   top: 100px;
+}
+
+@media (max-width: 900px) {
+  .stickyPanel {
+    position: static;
+  }
 }
 
 .panelTitle {
@@ -208,6 +229,7 @@
 /* AI Sidebar */
 .toolsSidebar {
   padding-left: 1rem;
+  margin-top: 2rem;
 }
 
 .aiToolBox {
@@ -266,24 +288,30 @@
   background-color: #eeeeee;
 }
 
-@media (max-width: 1024px) {
-  .readerLayout {
-    grid-template-columns: 200px 1fr;
-  }
+@media (max-width: 1200px) {
   .toolsSidebar {
-    display: none;
+    padding-left: 0;
   }
 }
 
-@media (max-width: 768px) {
-  .readerLayout {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+@media (max-width: 900px) {
   .tocSidebar {
-    display: none;
+    border-right: none;
+    padding-right: 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1rem;
   }
+  
+  .toolsSidebar {
+    margin-top: 3rem;
+  }
+  
   .mainContent {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
   }
 }

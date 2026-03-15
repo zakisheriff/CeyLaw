@@ -11,14 +11,14 @@ async function test() {
     console.log("Connecting to collection...");
     const collection = db.collection("laws_vectors");
     
-    console.log("Counting documents...");
-    const count = await collection.countDocuments({}, 1000);
-    console.log("Count:", count);
+    // console.log("Counting documents...");
+    // const count = await collection.countDocuments({}, 1000);
+    // console.log("Count:", count);
     
     console.log("Fetching laws with new stable params...");
     const cursor = collection.find({}, {
       limit: 300,
-      projection: { act_title: 1, act_year: 1, section: 1, category: 1 }
+      // projection: { act_title: 1, act_year: 1, section: 1, category: 1 }
     });
     const docs = await cursor.toArray();
     console.log("Found docs:", docs.length);

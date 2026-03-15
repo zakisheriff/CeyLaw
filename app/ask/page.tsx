@@ -29,10 +29,12 @@ function AskContext() {
   const [selectedLaw, setSelectedLaw] = useState<string>(initialLawSlug || "all");
   const [isLoading, setIsLoading] = useState(false);
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messages.length > 1 && messagesListRef.current) {
+      messagesListRef.current.scrollTop = messagesListRef.current.scrollHeight;
+    }
   }, [messages]);
 
   const handleSend = async (e?: React.FormEvent) => {
@@ -76,7 +78,20 @@ function AskContext() {
 
   const handlePromptClick = (promptText: string) => {
     setInput(promptText);
-    // Focus the input would be better, but we can also auto send
+  };
+
+  // Markdown-lite helper for **bold** and \n newlines
+  const renderContent = (content: string) => {
+    return content.split('\n').map((paragraph, pIdx) => (
+      <p key={pIdx} style={{ marginBottom: paragraph.trim() ? '1rem' : '0.5rem' }}>
+        {paragraph.split(/(\*\*.*?\*\*)/g).map((part, i) => {
+          if (part.startsWith('**') && part.endsWith('**')) {
+            return <strong key={i}>{part.slice(2, -2)}</strong>;
+          }
+          return part;
+        })}
+      </p>
+    ));
   };
 
   return (
@@ -119,14 +134,14 @@ function AskContext() {
       </div>
 
       <div className={styles.chatArea}>
-        <div className={styles.messagesList}>
+        <div className={styles.messagesList} ref={messagesListRef}>
           {messages.map(msg => (
             <div key={msg.id} className={`${styles.messageWrapper} ${msg.role === "user" ? styles.userWrapper : styles.aiWrapper}`}>
               <div className={styles.messageBubble}>
                 {msg.role === "ai" && <div className={styles.aiAvatar}>CeyLaw AI</div>}
                 
                 <div className={styles.messageContent}>
-                  <p>{msg.content}</p>
+                  {renderContent(msg.content)}
                 </div>
 
                 {msg.citations && msg.citations.length > 0 && (
@@ -153,7 +168,6 @@ function AskContext() {
               </div>
             </div>
           )}
-          <div ref={messagesEndRef} />
         </div>
 
         <div className={styles.inputArea}>

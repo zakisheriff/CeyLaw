@@ -1,0 +1,19 @@
+.copyBtn {
+  background-color: #000000;
+  color: #ffffff !important;
+  border: none;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.copyBtn:hover {
+  opacity: 0.7;
+}
+
+.copyBtn * {
+  color: #ffffff !important;
+}

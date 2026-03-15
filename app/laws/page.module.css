@@ -32,7 +32,7 @@
 .sidebar {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: 0;
   padding: 1.5rem;
   height: fit-content;
 }
@@ -61,7 +61,7 @@
   width: 100%;
   padding: 0.75rem 1rem;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: 0;
   font-size: 0.95rem;
   outline: none;
   transition: border-color 0.2s;
@@ -120,7 +120,7 @@
 .sortSelect {
   padding: 0.5rem 1rem;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: 0;
   background-color: var(--color-surface);
   color: var(--color-text-primary);
   outline: none;
@@ -144,7 +144,7 @@
   padding: 4rem 2rem;
   background-color: var(--color-surface);
   border: 1px dashed var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: 0;
   color: var(--color-text-secondary);
 }
 

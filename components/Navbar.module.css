@@ -67,9 +67,22 @@
 
 .hamburgerLine {
   width: 100%;
-  height: 2px;
+  height: 3px;
   background-color: var(--color-primary);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.mobileMenuBtn.open .hamburgerLine:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.mobileMenuBtn.open .hamburgerLine:nth-child(2) {
+  opacity: 0;
+}
+
+.mobileMenuBtn.open .hamburgerLine:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
 }
 
 @media (max-width: 768px) {

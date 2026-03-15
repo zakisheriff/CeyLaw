@@ -1,24 +1,43 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 import LawCard from "@/components/LawCard";
 
-export default function LawsLibrary() {
+// Client-side cache for session-wide stability
+let cachedLaws: any[] | null = null;
+let cachedTotalChunks: number = 0;
+
+function LawsLibraryContent() {
+  const searchParams = useSearchParams();
+  const initialCategory = searchParams.get("category");
+  
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [liveLaws, setLiveLaws] = useState<any[]>([]);
-  const [totalChunks, setTotalChunks] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [liveLaws, setLiveLaws] = useState<any[]>(cachedLaws || []);
+  const [totalChunks, setTotalChunks] = useState<number>(cachedTotalChunks);
+  const [isLoading, setIsLoading] = useState(!cachedLaws);
+
+  useEffect(() => {
+    if (initialCategory) {
+      setSelectedCategory(initialCategory);
+    }
+  }, [initialCategory]);
 
   useEffect(() => {
     async function fetchLaws() {
+      if (cachedLaws) return; // Skip if already have data
+      
       try {
         const res = await fetch('/api/laws');
         const data = await res.json();
         if (data.laws) {
           setLiveLaws(data.laws);
           setTotalChunks(data.totalChunks);
+          // Update global cache
+          cachedLaws = data.laws;
+          cachedTotalChunks = data.totalChunks;
         }
       } catch (err) {
         console.error("Fetch error:", err);
@@ -29,13 +48,13 @@ export default function LawsLibrary() {
     fetchLaws();
   }, []);
 
-  const categories = ["All", ...Array.from(new Set(liveLaws.map(law => law.category)))];
+  const categories = ["All", ...Array.from(new Set(liveLaws.map(law => law.category.trim().toLowerCase())))];
 
   const filteredLaws = liveLaws.filter(law => {
     const titleMatch = (law.title || "").toLowerCase().includes(searchQuery.toLowerCase());
     const actMatch = (law.act_number || "").toLowerCase().includes(searchQuery.toLowerCase());
     const matchesSearch = titleMatch || actMatch;
-    const matchesCategory = selectedCategory === "All" || law.category === selectedCategory;
+    const matchesCategory = selectedCategory === "All" || law.category.toLowerCase().trim() === selectedCategory.toLowerCase().trim();
     return matchesSearch && matchesCategory;
   });
 
@@ -124,5 +143,13 @@ export default function LawsLibrary() {
         </main>
       </div>
     </div>
+  );
+}
+
+export default function LawsLibrary() {
+  return (
+    <Suspense fallback={<div style={{ padding: '5rem', textAlign: 'center' }}>syncing legal database...</div>}>
+      <LawsLibraryContent />
+    </Suspense>
   );
 }

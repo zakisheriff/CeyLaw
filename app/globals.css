@@ -30,6 +30,7 @@
   text-transform: lowercase;
   font-family: var(--font-body);
   letter-spacing: -0.04em;
+  border-radius: 0 !important;
 }
 
 html,
@@ -43,8 +44,12 @@ body {
   min-height: 100vh;
 }
 
-.main-content {
-  flex: 1;
+.main-content:has(.hide-footer) + footer {
+  display: none;
+}
+
+.app-wrapper:has(.hide-footer) footer {
+  display: none;
 }
 
 body {
@@ -116,6 +121,12 @@ input::placeholder {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
 }
 
 /* Brutalist Component Overrides */

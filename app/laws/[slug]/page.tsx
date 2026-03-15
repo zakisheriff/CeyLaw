@@ -4,6 +4,7 @@ import styles from "./page.module.css";
 import { mockLaws, mockSections } from "@/lib/mockData";
 import { Copy } from "lucide-react";
 import { collections } from "@/lib/astra";
+import CopyButton from "@/components/CopyButton";
 
 interface PageProps {
   params: { slug: string };
@@ -19,38 +20,57 @@ export default async function LawReaderPage({ params }: PageProps) {
   // 2. If not found in mock, check Astra DB
   if (!law) {
     try {
-      // For MVP we'll scan chunks to find matching normalized title.
-      // We scan up to 1000 chunks to ensure coverage for deep acts.
-      const cursor = collections.lawsVectors.find({}, {
-        limit: 1000,
-        projection: { act_title: 1, act_year: 1, section: 1, content: 1, category: 1 }
-      });
-      const chunks = await cursor.toArray();
+      const { GoogleGenerativeAI } = await import("@google/generative-ai");
+      const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
+      const model = genAI.getGenerativeModel({ model: "gemini-embedding-2-preview" });
       
-      const matchingChunks = chunks.filter(c => 
-        c.act_title && c.act_title.toLowerCase().replace(/[^a-z0-9]+/g, '-') === slug
+      // 1. Convert slug back to a searchable query and get embedding
+      const searchQuery = slug.replace(/-/g, ' ');
+      const embedResult = await model.embedContent(searchQuery);
+      const embedding = embedResult.embedding.values;
+
+      // 2. Use vector search to find the most relevant chunk (to get the exact act_title)
+      const vectorMatch = await collections.lawsVectors.findOne(
+        {},
+        {
+          sort: { $vector: embedding },
+          projection: { act_title: 1 }
+        }
       );
 
-      if (matchingChunks.length > 0) {
-        const first = matchingChunks[0];
-        law = {
-          id: first._id ? first._id.toString() : Math.random().toString(),
-          slug: slug,
-          title: first.act_title,
-          year: first.act_year || "n/a",
-          act_number: first.section ? `act section ${first.section}` : "act",
-          category: first.category || "general law",
-          description: "browsing live sections from astra db."
-        } as any;
+      if (vectorMatch && vectorMatch.act_title) {
+        const exactTitle = vectorMatch.act_title;
+        
+        // 3. Query for ALL chunks with this exact title
+        const cursor = collections.lawsVectors.find(
+          { act_title: exactTitle },
+          {
+            projection: { act_title: 1, act_year: 1, section: 1, content: 1, category: 1 }
+          }
+        );
+        const matchingChunks = await cursor.toArray();
 
-        // Group chunks as sections
-        sections = matchingChunks.map((c, idx) => ({
-          id: c._id ? c._id.toString() : `${idx}`,
-          law_id: law?.id || "",
-          section_number: c.section || `${idx + 1}`,
-          heading: c.act_title,
-          content: c.content
-        })) as any;
+        if (matchingChunks.length > 0) {
+          const first = matchingChunks[0];
+          law = {
+            id: first._id ? first._id.toString() : Math.random().toString(),
+            slug: slug,
+            title: first.act_title,
+            year: first.act_year || "n/a",
+            act_number: first.section ? `act section ${first.section}` : "act",
+            category: first.category || "general law",
+            description: ""
+          } as any;
+
+          // Group chunks as sections, sorted by section identifier if possible
+          sections = matchingChunks.map((c, idx) => ({
+            id: c._id ? c._id.toString() : `${idx}`,
+            law_id: law?.id || "",
+            section_number: c.section || `${idx + 1}`,
+            heading: c.act_title,
+            content: c.content
+          })) as any;
+        }
       }
     } catch (err) {
       console.error("Astra Reader Error:", err);
@@ -62,7 +82,7 @@ export default async function LawReaderPage({ params }: PageProps) {
   }
 
   return (
-    <div className={styles.readerPage}>
+    <div className={`${styles.readerPage} hide-footer`}>
       <header className={styles.readerHeader}>
         <div className="container">
           <Link href="/laws" className={styles.backLink}>&larr; Back to Library</Link>
@@ -109,7 +129,7 @@ export default async function LawReaderPage({ params }: PageProps) {
                       <span className={styles.sectionNumber}>{sec.section_number}.</span> {sec.heading}
                     </h2>
                     <div className={styles.sectionActions}>
-                      <button className={styles.iconBtn} title="Copy Link"><Copy size={16} /></button>
+                      <CopyButton text={`${typeof window !== 'undefined' ? window.location.origin : ''}/laws/${law.slug}#section-${sec.section_number}`} />
                     </div>
                   </div>
                   <div className={styles.sectionContent}>
