@@ -157,8 +157,12 @@ export default async function LawReaderPage({ params }: PageProps) {
               
               <div className={styles.quickPrompts}>
                 <h4>Quick Prompts</h4>
-                <button className={styles.promptBtn}>Summarize this Act</button>
-                <button className={styles.promptBtn}>What are the key penalties?</button>
+                <Link href={`/ask?law=${law.slug}&prompt=${encodeURIComponent("Summarize this Act briefly.")}`} className={styles.promptBtn}>
+                  Summarize this Act
+                </Link>
+                <Link href={`/ask?law=${law.slug}&prompt=${encodeURIComponent("What are the key penalties mentioned in this Act?")}`} className={styles.promptBtn}>
+                  What are the key penalties?
+                </Link>
               </div>
             </div>
           </div>

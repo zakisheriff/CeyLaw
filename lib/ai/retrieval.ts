@@ -21,7 +21,7 @@ const db = astraClient.db(process.env.ASTRA_DB_API_ENDPOINT as string, {
 // Initialize Gemini
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
 
-export async function retrieveLegalContext(query: string, limit: number = 5): Promise<RetrievalResult> {
+export async function retrieveLegalContext(query: string, lawSlug: string = "all", limit: number = 5): Promise<RetrievalResult> {
   try {
     // 1. Generate Query Embedding
     const model = genAI.getGenerativeModel({ model: "gemini-embedding-2-preview" });
@@ -30,8 +30,25 @@ export async function retrieveLegalContext(query: string, limit: number = 5): Pr
 
     // 2. Query Astra DB Vector Search
     const collection = db.collection("laws_vectors");
+    
+    let filter = {};
+    if (lawSlug && lawSlug !== "all") {
+      // Try to find the exact act_title first to be precise
+      const searchQuery = lawSlug.replace(/-/g, ' ');
+      const match = await collection.findOne(
+        {},
+        {
+          sort: { $vector: embedding },
+          projection: { act_title: 1 }
+        }
+      );
+      if (match && match.act_title) {
+        filter = { act_title: match.act_title };
+      }
+    }
+
     const cursor = collection.find(
-      {},
+      filter,
       {
         sort: { $vector: embedding },
         limit

@@ -17,6 +17,7 @@ type Message = {
 function AskContext() {
   const searchParams = useSearchParams();
   const initialLawSlug = searchParams.get("law");
+  const initialPrompt = searchParams.get("prompt");
   
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -36,6 +37,25 @@ function AskContext() {
       messagesListRef.current.scrollTop = messagesListRef.current.scrollHeight;
     }
   }, [messages]);
+
+  // Handle auto-prompt from URL
+  const processedPrompt = useRef(false);
+  useEffect(() => {
+    if (initialPrompt && !processedPrompt.current) {
+      processedPrompt.current = true;
+      setInput(initialPrompt);
+      // We can't call handleSend directly easily because of state updates, 
+      // but we can trigger it or just let the user see it's filled.
+      // Better to trigger it.
+    }
+  }, [initialPrompt]);
+
+  // Second effect to trigger the send after input state settles
+  useEffect(() => {
+    if (processedPrompt.current && input === initialPrompt && !isLoading && messages.length === 1) {
+      handleSend();
+    }
+  }, [input]);
 
   const handleSend = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -98,17 +118,26 @@ function AskContext() {
     <div className={styles.askContainer}>
       <div className={styles.sidebar}>
         <div className={styles.settingsGroup}>
-          <label className={styles.settingsLabel}>Search Context</label>
+          <label className={styles.settingsLabel}>
+            {selectedLaw !== "all" ? "🔒 Context Locked" : "Search Context"}
+          </label>
           <select 
-            className={styles.contextSelect} 
+            className={`${styles.contextSelect} ${selectedLaw !== "all" ? styles.contextLocked : ""}`} 
             value={selectedLaw}
             onChange={(e) => setSelectedLaw(e.target.value)}
           >
-            <option value="all">Entire Library</option>
+            <option value="all">Entire Library (Broad Search)</option>
             {mockLaws.map(law => (
-              <option key={law.id} value={law.slug}>{law.title}</option>
+              <option key={law.id} value={law.slug}>
+                {law.slug === initialLawSlug ? `Current: ${law.title}` : law.title}
+              </option>
             ))}
           </select>
+          {selectedLaw !== "all" && (
+            <p className={styles.contextHint}>
+              AI search is strictly limited to this specific Act.
+            </p>
+          )}
         </div>
 
         <div className={styles.promptsSection}>

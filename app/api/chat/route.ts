@@ -6,10 +6,10 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
 
 export async function POST(req: Request) {
   try {
-    const { message } = await req.json();
+    const { message, lawSlug } = await req.json();
 
     // 1. Retrieve Context from Astra DB
-    const { context, citations } = await retrieveLegalContext(message);
+    const { context, citations } = await retrieveLegalContext(message, lawSlug);
 
     // 2. Construct Prompt
     const prompt = constructLegalPrompt(message, context);
